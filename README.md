@@ -1,11 +1,15 @@
 # MPI IPython Kernel for Jupyter
 
-A basic mpi+ipython kernel using mpi4py. Exports `rank`, `comm`, `nprocs`, and `mpiprint` into the global
-namespace.
+A basic mpi+ipython kernel using mpi4py.
+
+Exports `rank`, `comm`, `nprocs`, and `mpiprint` into the global namespace:
 
 ```python
 >>> nprocs
 4
+
+>>> print("hello from %d" % rank)
+hello from 0
 
 >>> mpiprint("hello from %d" % rank)
 hello from 0
@@ -19,7 +23,7 @@ hello from 3
 
 ## Installation
 
-To install with the defaults (mpiexec=mpirun, npocs=2)
+To install with the defaults (mpiexec=`mpirun`, npocs=`2`)
 
 ```shell
 pip install .
