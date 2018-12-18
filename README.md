@@ -40,3 +40,17 @@ You may also launch the kernel yourself and connect:
 ```shell
 mpirun -n 4 python -m mpipykernel.mpipykernel
 ```
+
+or embed the kernel:
+
+```
+mpirun -n 4 python -c "s = 'hi from %d'; from mpipykernel import embed; embed(locals())"
+
+...
+
+>>> mpiprint(s%rank)
+hi from 0
+hi from 1
+hi from 2
+hi from 3
+```

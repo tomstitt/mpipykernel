@@ -40,7 +40,7 @@ class MPIPythonKernel(IPythonKernel):
         return super().do_execute(code, silent, *args, **kws)
 
 
-def non_root_execute_loop():
+def non_root_execute_loop(local_ns):
     while True:
         #debug("%d: waiting for input" % rank)
         code = None
@@ -50,10 +50,19 @@ def non_root_execute_loop():
         if code == "quit":
             break
         try:
-            exec(code)
-        except:
-            # TODO: log
+            exec(code, globals(), local_ns)
+        except Exception as e:
+            #debug(e)
             pass
+
+
+def embed(local_ns={}, **kwargs):
+    from ipykernel.embed import embed_kernel
+    mpi_ns.update(local_ns)
+    if rank == 0:
+        embed_kernel(kernel_class=MPIPythonKernel, local_ns=mpi_ns, **kwargs)
+    else:
+        non_root_execute_loop(mpi_ns)
 
 
 if __name__ == "__main__":
