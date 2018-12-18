@@ -42,13 +42,19 @@ You can select the kernel from the "New" menu but you're stuck with a fixed numb
 You may also launch the kernel yourself and connect:
 
 ```shell
-mpirun -n 4 python -m mpipykernel.mpipykernel
+> mpirun -n 4 python -m mpipykernel.mpipykernel
+...
+To connect another client to this kernel, use:
+    --existing kernel-abc.json
 ```
 
 or embed the kernel:
 
 ```
-mpirun -n 4 python -c "s = 'hi from %d'; from mpipykernel import embed; embed(locals())"
+> mpirun -n 4 python -c "s = 'hi from %d'; from mpipykernel import embed; embed(locals())"
+...
+To connect another client to this kernel, use:
+    --existing kernel-abc.json
 
 ...
 
