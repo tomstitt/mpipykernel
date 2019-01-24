@@ -17,6 +17,9 @@ hello from 1
 hello from 2
 hello from 3
 
+>>> comm.reduce(rank)
+6
+
 >>> comm
 <mpi4py.MPI.Intracomm at 0x10ba38468>
 ```
